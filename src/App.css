@@ -1,0 +1,231 @@
+body {
+  background: url('./images/background.jpg')
+    no-repeat
+    center
+    center
+    fixed;
+  background-size: cover;
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Console {
+  width: 650px;
+  height: 650px;
+  background: #202020;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10% 5%;
+  border-radius: 100%;
+  -webkit-box-shadow: 10px 10px 17px 2px rgba(0,0,0,0.63);
+  -moz-box-shadow: 10px 10px 17px 2px rgba(0,0,0,0.63);
+  box-shadow: 10px 10px 17px 2px rgba(0,0,0,0.63);
+}
+
+.Simon-title {
+  margin: 25px 0;
+  font-family: 'Righteous', serif;
+  font-size: 2.5em;
+}
+
+.Controls {
+  position: absolute;
+  z-index: 1;
+  height: 200px;
+  width: 200px;
+  background: #f1f1f1;
+  border: solid 20px #202020;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Teko', sans-serif;
+}
+
+.Control-bulk {
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  align-items: flex-end;
+  margin: 5px;
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.Control-buttons {
+  margin: 0 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Count-display {
+  height: 30px;
+  width: 40px;
+  background: #7f8d74;
+  border: solid #202020 3px;
+  border-radius: 5px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5em;
+  color: black;
+  -webkit-box-shadow: inset 2px 2px 3px 0px rgba(0,0,0,0.47);
+  -moz-box-shadow: inset 2px 2px 3px 0px rgba(0,0,0,0.47);
+  box-shadow: inset 2px 2px 3px 0px rgba(0,0,0,0.47);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.Start-button, .Strict-button {
+  height: 20px;
+  width: 20px;
+  box-sizing: content-box;
+  padding: 0;
+  border: solid 2.5px #202020;
+  border-radius: 100%;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.47);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.47);
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.47);
+}
+
+.Start-button {
+  background: #9f0f17;
+}
+
+.Strict-button {
+  background: #FFDC00;
+}
+
+.Strict-light {
+  height: 5px;
+  width: 5px;
+  border: solid 1.5px #202020;
+  border-radius: 100%;
+  margin-bottom: 3px;
+}
+
+.strict-light-off {
+  background: #4e0101;
+}
+
+.strict-light-on {
+  background: #ff0000;
+}
+
+.button-label {
+  margin: 0;
+}
+
+.On-toggle {
+  margin: 5px 0 20px 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-button {
+  padding: 0;
+}
+
+.toggle-icon {
+  color: #202020;
+  padding: 5px;
+}
+
+.rotate-icon {
+  transform: rotate(180deg);
+}
+
+.Row {
+  display: flex;
+  flex-direction: row;
+}
+
+.play-buttons {
+  width: 299px;
+  height: 299px;
+}
+
+.play-buttons:hover {
+  opacity: 0.5;
+}
+
+.Buttons {
+  width: 300px;
+  height: 300px;
+}
+
+.Green, .green-button {
+  background-color: #00a74a;
+  border-radius: 100% 0 0 0;
+}
+
+.green-button:hover {
+  opacity: 0.5;
+}
+
+.On-toggle {
+  display: flex;
+  flex-direction: row;
+}
+
+.Red {
+  background-color: #9f0f17;
+  border-radius: 0 100% 0 0;
+}
+
+.Yellow {
+  background-color: #cca707;
+  border-radius: 0 0 0 100%;
+}
+
+.Blue {
+  background-color: #094a8f;
+  border-radius: 0 0 100% 0;
+}
+
+.border-left {
+  border-left: 10px solid #202020;
+}
+
+.border-right {
+  border-right: 10px solid #202020;
+}
+
+.border-bottom {
+  border-bottom: 10px solid #202020;
+}
+
+.border-top {
+  border-top: 10px solid #202020;
+}
+
+.Footer {
+  width: 100%;
+  margin: auto auto 0 auto;
+  padding: 0.5% 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+@media (max-width: 500px) {
+  .Footer {
+    font-size: 0.5em;
+  }
+}

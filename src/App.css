@@ -103,6 +103,10 @@ button {
   box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.47);
 }
 
+.Start-button:active, .Strict-button:active {
+  transform: translateY(1.5px);
+}
+
 .Start-button {
   background: #9f0f17;
 }
@@ -151,6 +155,11 @@ button {
   transform: rotate(180deg);
 }
 
+.On-toggle {
+  display: flex;
+  flex-direction: row;
+}
+
 .Row {
   display: flex;
   flex-direction: row;
@@ -162,7 +171,11 @@ button {
 }
 
 .play-buttons:hover {
-  opacity: 0.5;
+  opacity: 0.8;
+}
+
+.play-buttons:focus {
+  outline: none;
 }
 
 .Buttons {
@@ -171,32 +184,51 @@ button {
 }
 
 .Green, .green-button {
-  background-color: #00a74a;
   border-radius: 100% 0 0 0;
 }
 
-.green-button:hover {
-  opacity: 0.5;
+.green-button {
+  background-color: #00a74a;
 }
 
-.On-toggle {
-  display: flex;
-  flex-direction: row;
+.green-button:active {
+  background-color: #00ff71;
 }
 
-.Red {
-  background-color: #9f0f17;
+.Red, .red-button {
   border-radius: 0 100% 0 0;
 }
 
-.Yellow {
-  background-color: #cca707;
+.red-button {
+  background-color: #9f0f17;
+}
+
+.red-button:active {
+  background-color: #ff0015;
+}
+
+.Yellow, .yellow-button {
   border-radius: 0 0 0 100%;
 }
 
-.Blue {
-  background-color: #094a8f;
+.yellow-button {
+  background-color: #cca707;
+}
+
+.yellow-button:active {
+  background-color: #ffdc00;
+}
+
+.Blue, .blue-button {
   border-radius: 0 0 100% 0;
+}
+
+.blue-button {
+  background-color: #094a8f;
+}
+
+.blue-button:active {
+  background-color: #007bff;
 }
 
 .border-left {

@@ -90,15 +90,15 @@ class App extends Component {
               <button className='1 green-button play-buttons' disabled={!isOn}></button>
             </div>
             <div className={`Buttons Red border-top border-right ${activeQuadrant === 2 ? 'active' : ''}`}>
-              <button className='2 play-buttons' disabled={!isOn}></button>
+              <button className='2 red-button play-buttons' disabled={!isOn}></button>
             </div>
           </div>
           <div className='Row'>
             <div className='Buttons Yellow border-top border-bottom border-left border-right'>
-              <button className='3 play-buttons' disabled={!isOn}></button>
+              <button className='3 yellow-button play-buttons' disabled={!isOn}></button>
             </div>
             <div className='Buttons Blue border-top border-bottom border-right'>
-              <button className='4 play-buttons' disabled={!isOn}></button>
+              <button className='4 blue-button play-buttons' disabled={!isOn}></button>
             </div>
           </div>
         </div>

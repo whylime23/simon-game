@@ -178,10 +178,6 @@ button {
   outline: none;
 }
 
-.play-buttons:active:enabled {
-  opacity: 0.7
-}
-
 .Buttons {
   width: 300px;
   height: 300px;
@@ -199,12 +195,20 @@ button {
   background-color: #00a74a;
 }
 
+.green-button-lit, .green-button:active {
+  background-color: #00ff71;
+}
+
 .Red, .red-button {
   border-radius: 0 100% 0 0;
 }
 
 .red-button {
   background-color: #9f0f17;
+}
+
+.red-button-lit, .red-button:active {
+  background-color: #ff0015;
 }
 
 .Yellow, .yellow-button {
@@ -215,12 +219,20 @@ button {
   background-color: #cca707;
 }
 
+.yellow-button-lit, .yellow-button:active {
+  background-color: #f9ff00
+}
+
 .Blue, .blue-button {
   border-radius: 0 0 100% 0;
 }
 
 .blue-button {
   background-color: #094a8f;
+}
+
+.blue-button-lit, .blue-button:active {
+  background-color: #007bff
 }
 
 .border-left {

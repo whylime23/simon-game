@@ -48,6 +48,20 @@ class App extends Component {
     }
   }
 
+  buttonLit = (colour) => {
+    const { activeQuadrant, clickedColour } = this.state;
+    return activeQuadrant === colour || clickedColour === colour ? `${colour}-button-lit` : '';
+  }
+
+  lightQuadrant = (colour) => {
+    this.setState({ clickedColour: colour }, () => {
+      setTimeout(() => {
+        this.setState({ clickedColour: '' });
+      }, 750)
+    }
+    )
+  }
+
   handleStart = () => {
     const randomColour = this.generateQuadrant();
     this.state.sequence.push(randomColour);
@@ -84,15 +98,13 @@ class App extends Component {
   }
 
   handleQuadrantClick = (colour) => {
-    this.setState({
-      clickedColour: colour
-    });
+    this.lightQuadrant(colour);
     this.playSound(colour);
   }
 
   render() {
 
-    const { activeQuadrant, count, isOn, isStrict } = this.state;
+    const { activeQuadrant, clickedColour, count, isOn, isStrict } = this.state;
 
     return (
       <div className='App'>
@@ -130,13 +142,13 @@ class App extends Component {
               <audio ref={(element) => { this.green = element; }}>
                 <source src={greenSound} type='audio/mpeg'/>
               </audio>
-              <button className={`1 green-button play-buttons ${activeQuadrant === 'green' ? 'green-button-lit' : ''}`} onClick={() => this.handleQuadrantClick('green')} disabled={!isOn}></button>
+              <button className={`1 green-button play-buttons ${this.buttonLit('green')}`} onClick={() => this.handleQuadrantClick('green')} disabled={!isOn}></button>
             </div>
             <div className='Buttons Red border-top border-right'>
               <audio ref={(element) => { this.red = element; }}>
                 <source src={redSound} type='audio/mpeg'/>
               </audio>
-              <button className={`2 red-button play-buttons ${activeQuadrant === 'red' ? 'red-button-lit' : ''}`} onClick={() => this.handleQuadrantClick('red')} disabled={!isOn}></button>
+              <button className={`2 red-button play-buttons ${this.buttonLit('red')}`} onClick={() => this.handleQuadrantClick('red')} disabled={!isOn}></button>
             </div>
           </div>
           <div className='Row'>
@@ -144,13 +156,13 @@ class App extends Component {
               <audio ref={(element) => { this.yellow = element; }}>
                 <source src={yellowSound} type='audio/mpeg'/>
               </audio>
-              <button className={`3 yellow-button play-buttons ${activeQuadrant === 'yellow' ? 'yellow-button-lit' : ''}`} onClick={() => this.handleQuadrantClick('yellow')} disabled={!isOn}></button>
+              <button className={`3 yellow-button play-buttons ${this.buttonLit('yellow')}`} onClick={() => this.handleQuadrantClick('yellow')} disabled={!isOn}></button>
             </div>
             <div className='Buttons Blue border-top border-bottom border-right'>
               <audio ref={(element) => { this.blue = element; }}>
                 <source src={blueSound} type='audio/mpeg'/>
               </audio>
-              <button className={`4 blue-button play-buttons ${activeQuadrant === 'blue' ? 'blue-button-lit' : ''}`} onClick={() => this.handleQuadrantClick('blue')} disabled={!isOn}></button>
+              <button className={`4 blue-button play-buttons ${this.buttonLit('blue')}`} onClick={() => this.handleQuadrantClick('blue')} disabled={!isOn}></button>
             </div>
           </div>
         </div>

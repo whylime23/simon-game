@@ -64,6 +64,9 @@ button {
   border: none;
   color: inherit;
   font: inherit;
+}
+
+button:hover:enabled {
   cursor: pointer;
 }
 
@@ -170,10 +173,6 @@ button {
   height: 300px;
 }
 
-.play-buttons:hover:enabled {
-  opacity: 0.9;
-}
-
 .play-buttons:focus {
   outline: none;
 }
@@ -195,7 +194,7 @@ button {
   background-color: #00a74a;
 }
 
-.green-button-lit, .green-button:active {
+.green-button-lit {
   background-color: #00ff71;
 }
 
@@ -207,7 +206,7 @@ button {
   background-color: #9f0f17;
 }
 
-.red-button-lit, .red-button:active {
+.red-button-lit {
   background-color: #ff0015;
 }
 
@@ -219,7 +218,7 @@ button {
   background-color: #cca707;
 }
 
-.yellow-button-lit, .yellow-button:active {
+.yellow-button-lit {
   background-color: #f9ff00
 }
 
@@ -231,7 +230,7 @@ button {
   background-color: #094a8f;
 }
 
-.blue-button-lit, .blue-button:active {
+.blue-button-lit {
   background-color: #007bff
 }
 

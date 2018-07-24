@@ -7,15 +7,18 @@ import redSound from './sounds/simonSound2.mp3';
 import yellowSound from './sounds/simonSound3.mp3';
 import blueSound from './sounds/simonSound4.mp3';
 
+const BUTTON_LIT_LENGTH = 500;
+const BUTTON_CYCLE_LENGTH = BUTTON_LIT_LENGTH * 2;
+
 class App extends Component {
   state = {
     isOn: false,
     isStrict: false,
-    isStart: false,
-    count: 0,
     clickedColour: '',
     activeQuadrant: '',
     playerTurn: 'computer',
+    error: false,
+    win: false,
     computerSequence: [],
     userSequence: []
   }
@@ -63,40 +66,109 @@ class App extends Component {
     this.setState({ clickedColour: colour }, () => {
       setTimeout(() => {
         this.setState({ clickedColour: '' });
-      }, 750)
+      }, BUTTON_LIT_LENGTH)
     }
     )
   }
 
   computerTurn = () => {
-    const { computerSequence, count } = this.state
+    const { computerSequence } = this.state;
     const randomColour = this.generateQuadrant();
+    // catches error from strict reset
+    this.setState({
+      error: false
+    });
+    // add computer colour to computer sequence
     computerSequence.push(randomColour);
-    this.playSound(randomColour)
+    // run computer sequence
+    this.lightComputerSequence();
+  }
 
-    this.setState({ activeQuadrant: randomColour, count: count + 1 }, () => {
+  computerTurnWithTimeout = () => {
+    setTimeout(this.computerTurn, BUTTON_CYCLE_LENGTH);
+  };
+
+  lightComputerSequence = () => {
+    const { computerSequence } = this.state;
+    console.log(computerSequence); // included for testing
+    for (let i = 0; i < computerSequence.length; i++) {
       setTimeout(() => {
-        this.setState({ activeQuadrant: '', playerTurn: 'user' });
-      }, 750)
+        this.playSound(computerSequence[i])
+        this.setState({ activeQuadrant: computerSequence[i] }, () => {
+          setTimeout(() => {
+            this.setState({ activeQuadrant: '', playerTurn: 'user'});
+          }, BUTTON_LIT_LENGTH)
+        })
+      }, (i + 1) * BUTTON_CYCLE_LENGTH)
     }
-    )
+  }
+
+  lightWinSequence = () => {
+    const winSequence = ['green', 'red', 'blue', 'yellow', 'green', 'red', 'blue', 'yellow'];
+    for (let i = 0; i < winSequence.length; i++) {
+      setTimeout(() => {
+        this.setState({ activeQuadrant: winSequence[i] }, () => {
+          setTimeout(() => {
+            this.setState({ activeQuadrant: '' });
+          }, 250)
+        })
+      }, (i + 1) * 500)
+    }
+
   }
 
   checkUserTurn = () => {
-    const { userSequence, computerSequence } = this.state;
+    const { userSequence, computerSequence, isStrict } = this.state;
     for (let i = 0; i < userSequence.length; i++) {
       if (userSequence[i] !== computerSequence[i]) {
-        alert('You lost!!!');
+        if (isStrict) {
+          this.setState({
+            playerTurn: 'computer',
+            error: true,
+            computerSequence: [],
+            userSequence: []
+          }, this.computerTurnWithTimeout);
+        }
+        this.setState({
+          userSequence: [],
+          error: true,
+          playerTurn: 'user'
+        }, this.lightComputerSequence);
+        return;
       }
     }
 
-    const computerTurnWithTimeout = () => {
-      setTimeout(this.computerTurn, 1000);
-    };
+    if (userSequence.length !== computerSequence.length) {
+      return;
+    }
+
+    if (userSequence.length === 20) {
+      this.lightWinSequence();
+      this.setState({
+        win: true
+      }, this.onWinWithTimeout);
+      return;
+    }
 
     this.setState({
-      playerTurn: 'computer'
-    }, computerTurnWithTimeout);
+      playerTurn: 'computer',
+      userSequence: [],
+    }, this.computerTurnWithTimeout);
+  }
+
+  onWin = () => {
+    this.setState({
+      clickedColour: '',
+      activeQuadrant: '',
+      playerTurn: 'computer',
+      win: false,
+      computerSequence: [],
+      userSequence: []
+    }, this.computerTurn);
+  }
+
+  onWinWithTimeout = () => {
+    setTimeout(this.onWin, 5000)
   }
 
   handleStart = () => {
@@ -108,8 +180,6 @@ class App extends Component {
       this.setState({
         isOn: false,
         isStrict: false,
-        isStart: false,
-        count: 0,
         playerTurn: 'computer',
         computerSequence: [],
         userSequence: []
@@ -128,14 +198,30 @@ class App extends Component {
   }
 
   handleQuadrantClick = (colour) => {
+    this.setState({
+      error: false
+    });
     this.lightQuadrant(colour);
     this.playSound(colour);
     this.state.userSequence.push(colour);
     this.checkUserTurn();
   }
 
+  renderCountDisplay = () => {
+    const { computerSequence, isOn, error, win } = this.state;
+    if (!isOn) {
+      return '--';
+    } else if (error) {
+      return '! !';
+    } else if (win) {
+      return '😄'
+    } else {
+      return computerSequence.length;
+    }
+  }
+
   render () {
-    const { count, isOn, isStrict } = this.state;
+    const { isOn, isStrict } = this.state;
 
     return (
       <div className='App'>
@@ -144,7 +230,7 @@ class App extends Component {
             <h1 className='Simon-title'>SIMON</h1>
             <div className='Control-bulk'>
               <div className='Control-buttons'>
-                <span className='Count-display'>{!isOn ? '--' : count}</span>
+                <span className='Count-display'>{this.renderCountDisplay()}</span>
                 <span><p className='button-label'>COUNT</p></span>
               </div>
               <div className='Control-buttons'>
